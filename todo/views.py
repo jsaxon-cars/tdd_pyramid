@@ -16,7 +16,7 @@ def my_view(request):
 #        new_item_text = request.
     except DBAPIError:
         return Response(conn_err_msg, content_type='text/plain', status_int=500)
-    return {'new_item_text': 'blah', 'one': one, 'project': 'todo'}
+    return {'one': one, 'project': 'todo'}
 
 conn_err_msg = """\
 Pyramid is having a problem using your SQL database.  The problem

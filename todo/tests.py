@@ -2,19 +2,7 @@ import unittest
 import transaction
 from pyramid import testing
 from .models import DBSession
-
-class HomePageTest(TestCase):
-
-    def test_home_page_can_handle_post(self):
-        request = HttpRequest()
-        request.method = "POST"
-        request.POST['item_text'] = 'a new item'
-        response = home_page(request)
-        self.assertIn('a new item', response.content.decode())
-        expected_html = render_to_string(
-            'home.html',
-            {'new_item_text': 'a new item'})
-        self.assertEqual(response.content.decode(), expected_html)
+from webtest import TestApp
 
 class TestMyViewSuccessCondition(unittest.TestCase):
     def setUp(self):
@@ -39,11 +27,12 @@ class TestMyViewSuccessCondition(unittest.TestCase):
         from .views import my_view
         request = testing.DummyRequest()
         info = my_view(request)
-        print(info)
         self.assertEqual(info['one'].name, 'one')
         self.assertEqual(info['project'], 'todo')
-        self.assertEqual(info['new_item_text'], 'blah')
+        #response = TestApp.get('/')
+        #print (response.request)
 
+# What exactly are we failing here???
 class TestMyViewFailureCondition(unittest.TestCase):
     def setUp(self):
         self.config = testing.setUp()
