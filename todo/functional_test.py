@@ -9,7 +9,7 @@ class NewVisitorTest(unittest.TestCase):
         self.browser.implicitly_wait(3)
 
     def tearDown(self):
-        #self.browser.quit()
+        self.browser.quit()
         pass
 
     def get_table_rows(self):
