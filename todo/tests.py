@@ -68,6 +68,6 @@ class TestPostingNewItemIncludesNewItem(unittest.TestCase):
     def test_home_page_can_handle_post(self):
         request = testing.DummyRequest(post={'item_text':'a new item'})
         info = home(request)
-        self.assertEqual(info, {})
-        self.assertEqual(info['one'].name, 'one')
-        self.assertEqual(info['project'], 'todo')
+        self.assertIn('items', info.keys())
+        self.assertIn('item_text', info['items'])
+        self.assertIn('a new item', info['items']['item_text'])
